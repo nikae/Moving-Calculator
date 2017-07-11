@@ -38,8 +38,6 @@ class popUpVC: UIViewController {
     @IBOutlet weak var heavyItemPriceLabel: UILabel!
     @IBOutlet weak var elsePriceLabel: UILabel!
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         totalLabel.text = "$\(subtotal)"
@@ -58,7 +56,6 @@ class popUpVC: UIViewController {
         heavyItemCountLabel.text = "-"
         elseCountLabel.text = "-"
         
-        
         movePriceLabel.text = "$\(priceInTime)"
         wrapPriceLabel.text = "$\(wrapPriceCalc)"
         tapePriceLabel.text = "$\(tapeCalc)"
@@ -71,23 +68,13 @@ class popUpVC: UIViewController {
         trackGasPriceLabel.text = "$\(Double(trackGas))"
         heavyItemPriceLabel.text = "$\(Double(hevyItem))"
         elsePriceLabel.text = "$\(Double(elsel))"
-        
-        
-        
-        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-  
     @IBAction func tipHit(_ sender: UIButton) {
         if sender.tag == 0 {
             let tip = calculateTips(bill: subtotal, procent: 15.0)
             totalLabel.text = "$\(subtotal) + $\(String(format: "%.2f", tip)) Tip = $\(String(format: "%.2f",subtotal + tip))"
-           totalLabel.adjustsFontSizeToFitWidth = true
+            totalLabel.adjustsFontSizeToFitWidth = true
         } else if sender.tag == 1 {
             let tip = calculateTips(bill: subtotal, procent: 20.0)
             totalLabel.text = "$\(subtotal) + $\(String(format: "%.2f", tip)) Tip = $\(String(format: "%.2f",subtotal + tip))"
@@ -95,17 +82,12 @@ class popUpVC: UIViewController {
         }  else if sender.tag == 2 {
             let tip = calculateTips(bill: subtotal, procent: 30)
             totalLabel.text = "$\(subtotal) + $\(String(format: "%.2f", tip)) Tip = $\(String(format: "%.2f",subtotal + tip))"
-           totalLabel.adjustsFontSizeToFitWidth = true
+            totalLabel.adjustsFontSizeToFitWidth = true
         } else {
             totalLabel.text = "$\(subtotal)"
         }
-
-        
     }
-    
-
       @IBAction func dismiss(_ sender: UIButton) {
           self.dismiss(animated: true, completion: nil)
     }
-
 }

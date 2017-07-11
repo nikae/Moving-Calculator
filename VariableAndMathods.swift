@@ -31,17 +31,6 @@ var elsel = 0
 //MARK: --> Prices
 
 var manPriceCash = 0.0
-//2 - 59
-//3 - 84
-//4 - 104
-
-
-
-var manPricecard = 0.0
-//2 - 69
-//3 - 94
-//4 - 114
-
 
 var priceInTime = 0.0
 var materialTotalCalc = 0.0
@@ -65,7 +54,6 @@ var box4x4Price = 4.0 //3
 var box5x5Price = 5.0 //4.5
 var boxDishPrice = 7.0 
 
-
 func calculateMinutes(minute: Double) -> Double {
     var toReturne = 0.0
     if minute == 0 {
@@ -75,7 +63,6 @@ func calculateMinutes(minute: Double) -> Double {
     }
     return toReturne
 }
-
 
 
 func calculateTImeAndMan(time: Double, man: Double) -> Double {
@@ -98,13 +85,7 @@ func subTotalFunc(timeTotal: Double, materialTotal: Double, extraTotal: Double) 
     return timeTotal + materialTotal + extraTotal
 }
 
-
-
-
-
 func calculateTips(bill: Double, procent: Double) -> Double {
-//    let totalTip = bill! * (percent / 100)
-//    let totalBill = bill! + totalTip
     return bill * (procent / 100)
 }
 

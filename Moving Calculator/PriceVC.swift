@@ -19,10 +19,6 @@ class PriceVC: UIViewController {
     @IBOutlet weak var box3Label: UILabel!
     @IBOutlet weak var box45Label: UILabel!
     @IBOutlet weak var boxDishLabel: UILabel!
-    
-    //2 - 69
-    //3 - 94
-    //4 - 114
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,21 +38,4 @@ class PriceVC: UIViewController {
         box45Label.text = "$\(box5x5Price). each"
         boxDishLabel.text = "$\(boxDishPrice). each"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

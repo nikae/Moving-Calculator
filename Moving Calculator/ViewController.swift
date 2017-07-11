@@ -25,7 +25,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var hevyItemLabel: UILabel!
     @IBOutlet weak var elseLabel: UILabel!
     
-
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var b2: UIButton!
     @IBOutlet weak var b3: UIButton!
@@ -57,23 +56,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var b29: UIButton!
     @IBOutlet weak var b30: UIButton!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
  
    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func viewShape(view: UIView) {
         view.clipsToBounds = true
         view.layer.cornerRadius = view.frame.height/2
     }
-
     
     @IBAction func manHit(_ sender: UIButton) {
         if sender.tag == 0 {
@@ -120,9 +111,6 @@ class ViewController: UIViewController {
             minute = 0
             minuteLabel.text = "MM"
         }
-        
-        
-
     }
     
     @IBAction func plastickWrapHit(_ sender: UIButton) {
@@ -242,6 +230,7 @@ class ViewController: UIViewController {
         }
 
     }
+    
     @IBAction func trackAndGasHit(_ sender: UIButton) {
         if sender.tag == 0 {
             trackGas -= 5
@@ -257,6 +246,7 @@ class ViewController: UIViewController {
         }
 
     }
+    
     @IBAction func hevyItemHit(_ sender: UIButton) {
         if sender.tag == 0 {
             hevyItem -= 5
@@ -272,6 +262,7 @@ class ViewController: UIViewController {
         }
 
     }
+    
     @IBAction func elseHit(_ sender: UIButton) {
         if sender.tag == 0 {
             elsel -= 5
@@ -290,18 +281,13 @@ class ViewController: UIViewController {
 
     @IBAction func cashHit(_ sender: UIButton) {
         
-        
-        
         if man == 2 || man == 3 || man == 4{
-           
             var title = ""
-            
             if sender.tag == 0 {
                title = "Calculating Cash"
             } else if sender.tag == 1 {
                 title = "Calculating card"
             }
-
             
             let alert = UIAlertController(title: title , message: "Are you shure it's ready to calculate?", preferredStyle: .actionSheet)
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -328,40 +314,33 @@ class ViewController: UIViewController {
                 let mmFirst = (Double(minute) / 60 )
                 let mm = Double(String(format: "%.2f", mmFirst))!
                 
-                 priceInTime = calculateTImeAndMan(time: Double(hour) + mm, man: Double(manPriceCash))
-                
-                 wrapPriceCalc = calculateMaterial(material: plastickWrap, price: plastickWrapPrice)
-                 tapeCalc = calculateMaterial(material: Double(tape), price: tapePrice)
-                 blanketCalc = calculateMaterial(material: Double(blanket), price: blanketPrice)
-                 wordrobCalc = calculateMaterial(material: Double(wordrob), price: wordrobPrice)
-                 box3Calc = calculateMaterial(material: Double(box3x3), price: box3x3Price)
-                 box4Calc = calculateMaterial(material: Double(box4x4), price: box4x4Price)
-                 box5Calc = calculateMaterial(material: Double(box5x5), price: box5x5Price)
-                 boxDishCalc = calculateMaterial(material: Double(boxDish), price: boxDishPrice)
-                
+                priceInTime = calculateTImeAndMan(time: Double(hour) + mm, man: Double(manPriceCash))
+                wrapPriceCalc = calculateMaterial(material: plastickWrap, price: plastickWrapPrice)
+                tapeCalc = calculateMaterial(material: Double(tape), price: tapePrice)
+                blanketCalc = calculateMaterial(material: Double(blanket), price: blanketPrice)
+                wordrobCalc = calculateMaterial(material: Double(wordrob), price: wordrobPrice)
+                box3Calc = calculateMaterial(material: Double(box3x3), price: box3x3Price)
+                box4Calc = calculateMaterial(material: Double(box4x4), price: box4x4Price)
+                box5Calc = calculateMaterial(material: Double(box5x5), price: box5x5Price)
+                boxDishCalc = calculateMaterial(material: Double(boxDish), price: boxDishPrice)
                 materialTotalCalc = materialTotal(plastickWrap: wrapPriceCalc, tape: tapeCalc, blanket: blanketCalc, wordrob: wordrobCalc, box3x3: box3Calc, box4x4: box4Calc, box5x5: box5Calc, boxDish: boxDishCalc)
-                
                 extraTotalCalc = totalExtra(trackGas: Double(trackGas), heviItem: Double(hevyItem), elsea: Double(elsel))
-                
-                
                 subtotal = subTotalFunc(timeTotal: priceInTime, materialTotal: materialTotalCalc, extraTotal: extraTotalCalc)
                 
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popUpVC") as! popUpVC
                 self.present(vc, animated: true, completion: nil)
-                   })
+            })
             
             alert.addAction(calculate)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
-                    } else {
-            let alert = UIAlertController(title: "Error", message: "Man should be 2, 3, or 4", preferredStyle: .alert)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Mover: should be 2, 3, or 4", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
         }
-        
-        
     }
 
     @IBAction func refreshHit(_ sender: Any) {
@@ -407,24 +386,5 @@ class ViewController: UIViewController {
         elsel = 0
         elseLabel.text = "$"
     }
-  
-    
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
