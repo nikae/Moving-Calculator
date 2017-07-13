@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class popUpVC: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
@@ -90,4 +91,113 @@ class popUpVC: UIViewController {
       @IBAction func dismiss(_ sender: UIButton) {
           self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func confirmHit(_ sender: UIButton) {
+        let alsrt = UIAlertController(title: "confirm / resend", message: "Do you want to confirm or resend confirmation?", preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let confirm = UIAlertAction(title: "Confirm", style: .default, handler:{ (_) in
+            self.presentAlert()
+        })
+        let resend = UIAlertAction(title: "Resend", style: .default, handler:{ (_) in
+            let data1 = self.retrievePDFFromDisk()
+            self.share(link: data1 as! NSURL)
+        })
+
+        alsrt.addAction(confirm)
+        alsrt.addAction(resend)
+        alsrt.addAction(cancel)
+        self.present(alsrt, animated: true, completion: nil)
+    }
+    
+    func presentAlert() {
+        let alertController = UIAlertController(title: "Confirm Total of $\(subtotal)", message: "Please input your name and account code", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+            var name = ""
+            var code = ""
+            if let field = alertController.textFields?[0] {
+                if field.text != "" {
+                    name = field.text!.capitalized
+                } else {
+                    name = "No costumer's name presented"
+                }
+            }
+            if let field = alertController.textFields?[1] {
+                if field.text != "" {
+                    code = field.text!
+                } else {
+                    code = "No account code is presented"
+                }
+            }
+            
+            let textForPdf = pdfString(costumerName: name, code: code, subTotal: "\(subtotal)", moveTime: "\(hour):\(minute)",movePH: "\(Int(manPriceCash))", movePrice: "\(priceInTime)", wrapCount: "\(plastickWrap)", wrap: "\(wrapPriceCalc)", tapeCount: "\(tape)", tape: "\(tapeCalc)", blanketCount: "\(blanket)", blanket: "\(blanketCalc)", wordrobeCount: "\(wordrob)", wordrobe: "\(wordrobCalc)", box1Count: "\(box3x3)", box1: "\(box3Calc)", box2Count: "\(box4x4)", box2: "\(box4Calc)", box3Count: "\(box5x5)", box3: "\(box5Calc)", box4Count: "\(boxDish)", box4: "$\(boxDishCalc)", trackGas: "\(Double(trackGas))", heavyItem: "\(Double(hevyItem))", elsea: "\(Double(elsel))")
+            self.createPdf(text: textForPdf)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Full Name"
+        }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Security Code"
+            textField.keyboardType = .numberPad
+        }
+        alertController.addAction(confirm)
+        alertController.addAction(cancel)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func createPdf(text: String) {
+        
+        let formatter = UISimpleTextPrintFormatter(text: text)
+        formatter.textAlignment = .justified
+        formatter.font?.withSize(20)
+        let render = UIPrintPageRenderer()
+        render.addPrintFormatter(formatter, startingAtPageAt: 0)
+        
+        let page = CGRect(x: 0, y: 0, width: 595.2, height: 841.8) // A4, 72 dpi
+        let printable = page.insetBy(dx: 0, dy: 0)
+        
+        render.setValue(NSValue(cgRect: page), forKey: "paperRect")
+        render.setValue(NSValue(cgRect: printable), forKey: "printableRect")
+        
+        let rect = CGRect.zero
+        let pdfData = NSMutableData()
+        UIGraphicsBeginPDFContextToData(pdfData, rect, nil)
+        
+        for i in 1...render.numberOfPages {
+            UIGraphicsBeginPDFPage();
+            let bounds = UIGraphicsGetPDFContextBounds()
+            render.drawPage(at: i - 1, in: bounds)
+        }
+        
+        UIGraphicsEndPDFContext()
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        pdfData.write(toFile: "\(documentsPath)/new.pdf", atomically: true)
+        let data = getPDFAsFile(pdfData: pdfData)
+        share(link: data as! NSURL)
+    }
+    
+    func retrievePDFFromDisk () -> AnyObject {
+        var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last! as NSURL
+        docURL = docURL.appendingPathComponent( "document.pdf")! as NSURL
+        return docURL
+    }
+    
+    func getPDFAsFile (pdfData:NSData) -> AnyObject {
+        var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last! as NSURL
+        docURL = docURL.appendingPathComponent("document.pdf")! as NSURL
+        pdfData.write(to: docURL as URL, atomically: true)
+        return docURL
+    }
+    
+    func share(link: NSURL) {
+        let objectsToShare = [link] as [Any]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+        self.present(activityVC, animated: true, completion: nil)
+    }
 }
+
+

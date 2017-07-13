@@ -7,10 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 
 var subtotal = 0.0
-
 
 var man = 0
 var hour = 0
@@ -26,7 +26,6 @@ var boxDish = 0
 var trackGas = 0
 var hevyItem = 0
 var elsel = 0
-
 
 //MARK: --> Prices
 
@@ -88,6 +87,27 @@ func subTotalFunc(timeTotal: Double, materialTotal: Double, extraTotal: Double) 
 func calculateTips(bill: Double, procent: Double) -> Double {
     return bill * (procent / 100)
 }
+
+//MARK --> PDF
+
+func pdfString(costumerName: String, code: String, subTotal: String, moveTime: String, movePH: String, movePrice: String,wrapCount: String, wrap: String, tapeCount: String,tape: String, blanketCount: String, blanket: String, wordrobeCount: String, wordrobe: String, box1Count: String, box1: String, box2Count: String, box2: String, box3Count: String, box3: String, box4Count: String, box4: String, trackGas: String, heavyItem: String, elsea: String)-> String {
+    
+   let string = "\n\n\nCostumer - \(costumerName)\nSecurity Code - \(code)\n\nMove - \(moveTime) - \(movePH) - $\(movePrice)\n\nPacking:\n\nPlasik wrap - \(wrapCount) - $\(wrap)\nTape - \(tapeCount) - $\(tape)\nBlanket - \(blanketCount) - $\(blanket)\nWardrobe - \(wordrobeCount) - $\(wordrobe)\nBox 1.5x1.5 - \(box1Count) - $\(box1)\nBox 3x3 - \(box2Count) - $\(box2)\nBox 4.5x4.5 - \(box3Count) - $\(box3)\nBox Dish - \(box4Count) - $\(box4)\n\nExtras:\n\nTrack and gas - $\(trackGas)\nHeavy Item - $\(heavyItem)\nElse - $\(elsea)\n\nSub total:\n\nTotal - $\(subTotal)"
+    return string
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

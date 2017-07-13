@@ -757,6 +757,21 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GR3-vO-7su">
+                                        <rect key="frame" x="278" y="8" width="57" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="W22-qa-tuJ"/>
+                                            <constraint firstAttribute="width" constant="57" id="gre-FD-wKg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <state key="normal" title="Confirm">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="confirmHit:" destination="0yT-ky-GKS" eventType="touchUpInside" id="wEu-ax-UXc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.47450980390000003" blue="0.41960784309999999" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -767,7 +782,9 @@
                                     <constraint firstItem="q0Z-Uj-7Wq" firstAttribute="top" secondItem="P9j-ra-vZi" secondAttribute="bottom" constant="8" id="Psz-Uk-aZT"/>
                                     <constraint firstAttribute="trailing" secondItem="P9j-ra-vZi" secondAttribute="trailing" id="aV7-W8-2ub"/>
                                     <constraint firstAttribute="trailing" secondItem="q0Z-Uj-7Wq" secondAttribute="trailing" constant="8" id="cCL-da-uHe"/>
+                                    <constraint firstItem="GR3-vO-7su" firstAttribute="top" secondItem="Nfs-TX-urv" secondAttribute="top" constant="8" id="gcZ-IP-cqn"/>
                                     <constraint firstItem="P9j-ra-vZi" firstAttribute="leading" secondItem="Nfs-TX-urv" secondAttribute="leading" id="kSM-G3-PXo"/>
+                                    <constraint firstAttribute="trailing" secondItem="GR3-vO-7su" secondAttribute="trailing" constant="8" id="kf2-0M-ztO"/>
                                     <constraint firstItem="P9j-ra-vZi" firstAttribute="top" secondItem="Nfs-TX-urv" secondAttribute="top" constant="8" id="oGj-iF-Ijf"/>
                                     <constraint firstItem="rFN-ws-MZh" firstAttribute="leading" secondItem="Nfs-TX-urv" secondAttribute="leading" id="tOp-Ov-sCU"/>
                                 </constraints>
@@ -1188,7 +1205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBM-f0-rc9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="818"/>
+            <point key="canvasLocation" x="1231" y="795"/>
         </scene>
         <!--PriceVC-->
         <scene sceneID="FDl-Ij-a1L">
